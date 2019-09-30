@@ -98,7 +98,11 @@ class TFilamentMonitor : public FilamentMonitorBase {
 
     // Give the response a chance to update its counter.
     static inline void run() {
-      if (enabled && !filament_ran_out && (IS_SD_PRINTING() || print_job_timer.isRunning() || did_pause_print)) {
+      if (enabled && !filament_ran_out && (IS_SD_PRINTING() || print_job_timer.isRunning()
+        #if ENABLED(ADVANCED_PAUSE_FEATURE)
+          || did_pause_print
+        #endif
+      )) {
         #ifdef FILAMENT_RUNOUT_DISTANCE_MM
           cli(); // Prevent RunoutResponseDelayed::block_completed from accumulating here
         #endif
@@ -323,14 +327,14 @@ class FilamentSensorBase {
       }
 
       static inline void block_completed(const block_t* const b) {
-        if (b->steps[X_AXIS] || b->steps[Y_AXIS] || b->steps[Z_AXIS]
+        if (b->steps.x || b->steps.y || b->steps.z
           #if ENABLED(ADVANCED_PAUSE_FEATURE)
             || did_pause_print // Allow pause purge move to re-trigger runout state
           #endif
         ) {
           // Only trigger on extrusion with XYZ movement to allow filament change and retract/recover.
           const uint8_t e = b->extruder;
-          const int32_t steps = b->steps[E_AXIS];
+          const int32_t steps = b->steps.e;
           runout_mm_countdown[e] -= (TEST(b->direction_bits, E_AXIS) ? -steps : steps) * planner.steps_to_mm[E_AXIS_N(e)];
         }
       }

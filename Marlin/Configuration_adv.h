@@ -303,7 +303,7 @@
  * Define one or both of these to override the default 0-255 range.
  */
 // #define FAN_MIN_PWM 50
-#define FAN_MAX_PWM 128
+// #define FAN_MAX_PWM 128
 
 /**
  * FAST PWM FAN Settings
@@ -1329,7 +1329,7 @@
 //#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
-  #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
+  #define LIN_ADVANCE_K 0.06    // Unit: mm compression per 1mm/s extruder speed
   //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
 #endif
 

@@ -664,7 +664,7 @@
 #define Z_DRIVER_TYPE  TMC2130
 #define X2_DRIVER_TYPE TMC2130
 //#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
+#define Z2_DRIVER_TYPE TMC2130
 //#define Z3_DRIVER_TYPE A4988
 #define E0_DRIVER_TYPE TMC2130
 //#define E1_DRIVER_TYPE A4988
@@ -783,7 +783,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION 
 
 //===========================================================================
 //============================= Z Probe Options =============================
